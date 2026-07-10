@@ -1,0 +1,106 @@
+{
+  "info": {
+    "name": "CRUD - Tareas",
+    "_postman_id": "8f4d7d7c-9f3a-4b24-b7de-juanpablo",
+    "description": "Coleccion actualizada con CRUD de tareas y endpoints de clima de la Sesion 3.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:3000/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Tareas - listar todas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/tareas"
+      }
+    },
+    {
+      "name": "Tareas - obtener por id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/tareas/1"
+      }
+    },
+    {
+      "name": "Tareas - crear",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Revisar clima de Toluca\"\n}"
+        },
+        "url": "{{baseUrl}}/tareas"
+      }
+    },
+    {
+      "name": "Tareas - actualizar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Revisar clima actualizado\",\n  \"completada\": true\n}"
+        },
+        "url": "{{baseUrl}}/tareas/1"
+      }
+    },
+    {
+      "name": "Tareas - eliminar",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/tareas/1"
+      }
+    },
+    {
+      "name": "Tareas + clima - combinar",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/tareas/1/clima?ciudad=Toluca"
+      }
+    },
+    {
+      "name": "Clima - ciudad independiente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/clima/Toluca"
+      }
+    },
+    {
+      "name": "Clima - ciudad invalida 400",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/clima/@@@"
+      }
+    },
+    {
+      "name": "Clima - servicio externo falla 502",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/clima/CiudadQueNoExiste"
+      }
+    }
+  ]
+}
