@@ -6,6 +6,10 @@ const { body, validationResult } = require('express-validator');
 
 const app = express();
 
+if (!process.env.JWT_SECRET) {
+  throw new Error('La variable de entorno JWT_SECRET es obligatoria');
+}
+
 app.use(helmet());              // cabeceras de seguridad HTTP
 app.use(express.json());        // lectura de peticiones JSON
 app.use(morgan('dev'));         // registro de peticiones
@@ -59,9 +63,13 @@ app.get('/api/salud', (req, res) => {
 });
 
 const tareasRouter = require('./routes/tareas');
-app.use('/api/tareas', tareasRouter);
+const verificarToken = require('./middleware/auth');
+app.use('/api/tareas', verificarToken, tareasRouter);
 
 const climaRouter = require('./routes/clima');
-app.use('/api/clima', climaRouter);
+app.use('/api/clima', verificarToken, climaRouter);
+
+const authRouter = require('./routes/auth');
+app.use('/api/auth', authRouter);
 
 module.exports = app;
